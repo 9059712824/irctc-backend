@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.learning.irctcbackend.dao.UsersDao">
+    <resultMap id="usersStructure" type="com.learning.irctcbackend.model.Users">
+        <id property="uuid" column="uuid" jdbcType="VARCHAR" javaType="java.util.UUID"
+            typeHandler="com.learning.irctcbackend.handler.UuidTypeHandler"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="email" column="email"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="password" column="password"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updatedTime" column="updated_time"/>
+    </resultMap>
+
+    <select id="getUserByEmail" resultMap="usersStructure">
+        select *
+        from users
+        where email = #{email}
+    </select>
+    <insert id="insert" flushCache="true">
+        insert into users (uuid, first_name, last_name, email, phone_number, password, created_time, updated_time)
+        values (#{user.uuid}, #{user.firstName}, #{user.lastName}, #{user.email}, #{user.phoneNumber}, #{user.password},
+                current_timestamp, current_timestamp)
+    </insert>
+</mapper>
