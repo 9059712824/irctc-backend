@@ -16,7 +16,7 @@ public class StationController {
 
     private final StationService stationService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add")
     public ResponseEntity<Station> add(@RequestBody Station station) {
         return new ResponseEntity<>(stationService.add(station), HttpStatus.CREATED);
