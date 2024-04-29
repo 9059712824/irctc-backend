@@ -31,7 +31,7 @@ public class SpringSecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(authorize -> {
             authorize.requestMatchers("/auth/**").permitAll();
-//            authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
+            authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
             authorize.requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/swagger-resources/**", "/public/**").permitAll();
             authorize.anyRequest().authenticated();
         }).httpBasic(Customizer.withDefaults());

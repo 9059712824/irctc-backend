@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.learning.irctcbackend.dao.StationDao">
+    <resultMap id="stationStructure" type="com.learning.irctcbackend.model.Station">
+        <id property="uuid" column="uuid" jdbcType="VARCHAR" javaType="java.util.UUID"
+            typeHandler="com.learning.irctcbackend.handler.UuidTypeHandler"/>
+        <result property="name" column="name"/>
+        <result property="code" column="code"/>
+    </resultMap>
+
+    <select id="getByName" resultMap="stationStructure">
+        select *
+        from stations
+        where name = #{name}
+    </select>
+
+    <select id="getByCode" resultMap="stationStructure">
+        select *
+        from stations
+        where code = #{code}
+    </select>
+
+    <select id="getByUuid" resultMap="stationStructure">
+        select *
+        from stations
+        where uuid = #{uuid}
+    </select>
+
+    <insert id="insert" flushCache="true">
+        insert into stations (uuid, name, code)
+        values (#{station.uuid}, #{station.name}, #{station.code})   </insert>
+</mapper>

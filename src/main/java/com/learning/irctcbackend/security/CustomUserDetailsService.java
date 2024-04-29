@@ -31,7 +31,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         var userRoles = userRoleDao.getRolesByUserUuid(user.getUuid());
 
         Set<GrantedAuthority> authorities = userRoles.stream().map(role ->
-                new SimpleGrantedAuthority(role.getRole().toString())).collect(Collectors.toSet());
+                new SimpleGrantedAuthority("ROLE_" + role.getRole().toString())).collect(Collectors.toSet());
+        System.out.println(authorities);
 
         return new org.springframework.security.core.userdetails.User(
                 email,
